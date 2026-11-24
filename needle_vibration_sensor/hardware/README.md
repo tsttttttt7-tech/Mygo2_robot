@@ -15,13 +15,13 @@ Values and response: see `../WIRELESS_DESIGN.md` and `../software/filter_respons
 To transfer it into your KiCad Rev C project: delete C1, change the values above, and add R3b + JP1 (solder jumper), C5, C7, R13 and J4.
 
 ## Sensor housing: `stl/`
-![preview](stl/preview.png)
+![all views](stl/renders/all_views.png)
 
 | File | Size (mm) | What it is |
 |---|---|---|
 | `sensor_body.stl` | 40 × 30 × 14 | Piezo pocket on top (brass rests on its rim, so the ceramic is free to flex). 32 × 22 × 8.5 cavity underneath for the 30 × 20 mm amplifier PCB. 4.2 mm cable exit. |
 | `sensor_lid.stl` | 40 × 30 × 6 | Clamp. 3.2 mm needle groove along X, plus a Ø7 mm pocket over the piezo centre for a **rubber pad** (2.5 mm thick, e.g. cut from an eraser). Screwing the lid flat always compresses the pad by about 0.9 mm, so the **clamping force is the same in every experiment.** |
-| `sensor_bottom.stl` | 40 × 30 × 4 | Cover with locating lip, 4 × countersunk M2. Two M3 pilot holes (20 mm apart) for mounting on the robot. |
+| `sensor_bottom.stl` | 40 × 30 × 4 | Cover with locating lip, 4 × countersunk M2 (flat head). Two M3 pilot holes (20 mm apart) for mounting on the robot. |
 
 Regenerate for other parts: `python stl/make_stl.py --piezo 27 --pcb 40x25 --needle 2.0`
 (27 mm disc, DIP-version PCB, 2 mm Veress needle). It prints the key heights.
@@ -35,8 +35,8 @@ Print the body upside-down (cavity facing up) and the lid upside-down too (flat 
 2. Glue a **2 mm steel ball** (from a bearing or a bike shop) or a hard drop of epoxy to the **centre of the brass**. The needle touches only this point:
    one hard metal contact transmits the high-frequency puncture "clicks".
 3. Solder the piezo to J1 on the amplifier PCB (wires under 3 cm). Stick the PCB to the bottom cover with foam tape. Bring the shielded 3-wire cable
-   (3V3 / GND / OUT) out through the side hole. Close with 4 × M2 × 6 screws.
-4. Lay the needle in the lid groove over the ball, put the rubber pad in the pocket, and close the lid with 4 × M2 × 10 screws **until it sits flat**.
+   (3V3 / GND / OUT) out through the side hole. Close with 4 × M2 × 8 flat-head screws.
+4. Lay the needle in the lid groove over the ball, put the rubber pad in the pocket, and close the lid with 4 × M2 × 8 screws **until it sits flat**.
 5. Mount on the robot with 2 × M3 screws through your bracket into the bottom cover, with a rubber washer under each screw to isolate motor vibration.
 
 Heights for the default build: brass top z = 13.9 mm, needle axis z = 16.5 mm, lid groove 3.8 mm deep, pad pocket 4.8 mm deep.

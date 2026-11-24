@@ -53,11 +53,10 @@ def build(piezo=20.0, ceramic=None, pcb=(30.0, 20.0), pcb_h=8.5, needle=1.27, ba
     body -= cyl(ceramic + 1.0, H, z=pcb_h - 0.5)                            # free space under ceramic + wire path
     body -= Manifold.cylinder(2 * wall + 2, 2.1, 2.1, SEG).rotate([0, 90, 0]) \
         .translate([-L / 2 - 1, 0, pcb_h / 2])                               # cable exit, 4.2 mm
-    ys = W / 2 - wall / 2
-    top_holes = [(sx * (cav[0] / 2 - 3), sy * ys) for sx in (-1, 1) for sy in (-1, 1)]
-    bot_holes = [(sx * (L / 2 - wall / 2), sy * ys) for sx in (-1, 1) for sy in (-1, 1)]
+    top_holes = [(sx * (cav[0] / 2 - 3), sy * (W / 2 - 2.8)) for sx in (-1, 1) for sy in (-1, 1)]
+    bot_holes = [(sx * (L / 2 - 2.2), sy * (W / 2 - 2.2)) for sx in (-1, 1) for sy in (-1, 1)]
     for x, y in top_holes:
-        body -= cyl(1.7, 8.0, x, y, H - 8.0)                                 # M2 self-tapping pilot, lid
+        body -= cyl(1.7, 5.0, x, y, H - 5.0)                                 # M2 pilot, lid (stays in the 5.5 mm roof)
     for x, y in bot_holes:
         body -= cyl(1.7, 6.0, x, y, -0.01)                                   # M2 pilot, bottom cover
 
@@ -75,7 +74,7 @@ def build(piezo=20.0, ceramic=None, pcb=(30.0, 20.0), pcb_h=8.5, needle=1.27, ba
     lid -= cyl(7.0, pocket_d + 0.01, z=H - 0.01)                             # rubber pad pocket over piezo centre
     for x, y in top_holes:
         lid -= cyl(2.4, LT + 1, x, y, H - 0.5)                               # M2 clearance
-        lid -= cyl(4.4, 2.0, x, y, H + LT - 2.0)                             # counterbore for screw head
+        lid -= cyl(4.0, 2.0, x, y, H + LT - 2.0)                             # counterbore for M2 head
 
     # ---------------- bottom cover ----------------
     BT = 3.0
@@ -83,7 +82,7 @@ def build(piezo=20.0, ceramic=None, pcb=(30.0, 20.0), pcb_h=8.5, needle=1.27, ba
     bottom += box(cav[0] - 0.4, cav[1] - 0.4, 1.0, z=0) - box(cav[0] - 2.4, cav[1] - 2.4, 1.02, z=-0.01)  # locating lip
     for x, y in bot_holes:
         bottom -= cyl(2.4, BT + 2, x, y, -BT - 1)
-        bottom -= cyl(4.6, 1.5, x, y, -BT - 0.01, d2=2.4)                    # countersink
+        bottom -= cyl(3.8, 1.2, x, y, -BT - 0.01, d2=2.4)                    # countersink, M2 flat head
     for x in (-10.0, 10.0):
         bottom -= cyl(2.5, 2.5, x, 0, -BT - 0.01)                            # M3 self-tap pilot, robot mount
 
