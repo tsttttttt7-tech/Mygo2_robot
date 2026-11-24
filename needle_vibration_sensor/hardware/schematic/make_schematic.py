@@ -70,9 +70,9 @@ with schemdraw.Drawing(show=False) as d:
     d.add(elm.Line().at((n_fb.center[0] - 0.0, n_fb.center[1])).length(0.0001))
     d.add(elm.Line().at(n_fb2.center).up().toy(top_y))
     n_l = d.here
-    r3a = d.add(elm.Resistor().right().label('R3a 22k', fontsize=FS))
+    r3a = d.add(elm.Resistor().right().label('R3 22k', fontsize=FS))
     n_x = d.add(elm.Dot().label('X', loc='bottom', fontsize=7))
-    r3b = d.add(elm.Resistor().right().label('R3b 82k', loc='bottom', fontsize=FS))
+    r3b = d.add(elm.Resistor().right().label('R14 82k', loc='bottom', fontsize=FS))
     d.add(elm.Line().right().tox(op1.out[0] + 0.6))
     n_r = d.here
     d.add(elm.Line().down().toy(op1.out[1]))

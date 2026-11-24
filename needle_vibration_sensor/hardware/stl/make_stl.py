@@ -97,10 +97,12 @@ def main():
     p.add_argument("--ceramic", type=float, default=None, help="ceramic diameter (mm), default 14 (20 mm disc) / 20 (27 mm)")
     p.add_argument("--pcb", default="30x20", help="amplifier PCB size, e.g. 30x20 (SMD) or 40x25 (DIP)")
     p.add_argument("--needle", type=float, default=1.27, help="needle outer diameter (18G = 1.27 mm)")
+    p.add_argument("--pcb-h", type=float, default=8.5, help="free height above the PCB cavity floor (DIP board: 10)")
     p.add_argument("--out", default=os.path.dirname(os.path.abspath(__file__)))
+
     a = p.parse_args()
     pcb = tuple(float(v) for v in a.pcb.lower().split("x"))
-    body, lid, bottom, info = build(a.piezo, a.ceramic, pcb, needle=a.needle)
+    body, lid, bottom, info = build(a.piezo, a.ceramic, pcb, pcb_h=a.pcb_h, needle=a.needle)
     meshes = {}
     for name, m in (("sensor_body", body), ("sensor_lid", lid), ("sensor_bottom", bottom)):
         t = save(m, os.path.join(a.out, f"{name}.stl"))

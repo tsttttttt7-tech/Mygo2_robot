@@ -1,0 +1,1 @@
+(fp_lib_table (lib (name "Piezo_PCB") (type "KiCad") (uri "${KIPRJMOD}/Piezo_PCB.pretty") (options "") (descr "Project footprints - verify purchased package dimensions")))

@@ -1,0 +1,1 @@
+(sym_lib_table (lib (name "Piezo_Local") (type "KiCad") (uri "${KIPRJMOD}/Piezo_Local.kicad_sym") (options "") (descr "Self-contained prototype symbols")))

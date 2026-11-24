@@ -53,9 +53,9 @@ Single 3.3 V supply. Same topology as your Rev C, with these changes:
 | D1 | BAV99 | pin 3 → IN; pins 1 and 2 → VREF | Anti-parallel clamp to VREF |
 | U1A | MCP6002 | + (3) = IN, − (2) = FB, out (1) = AMP | Non-inverting gain stage |
 | R4 | 2.2 kΩ 1 % | FB → VREF | Gain resistor |
-| R3a | 22 kΩ 1 % | FB → X | Feedback |
-| R3b + JP1 | 82 kΩ 1 %, solder jumper across it | X → AMP | JP1 closed: gain **11**. JP1 open: gain **48**. |
-| C5 | 47 pF C0G | across R3a + R3b (FB → AMP) | Stability and RF roll-off |
+| R3 | 22 kΩ 1 % | FB → X | Feedback |
+| R14 + JP1 | 82 kΩ 1 %, solder jumper across it | X → AMP | JP1 closed: gain **11**. JP1 open: gain **48**. |
+| C5 | 47 pF C0G | across R3 + R14 (FB → AMP) | Stability and RF roll-off |
 | R5, R6 | 10 kΩ, 10 kΩ | AVDD → VDIV → GND | Half-supply divider |
 | C4 | 10 µF | VDIV → GND | Filters VREF (placed **before** the buffer) |
 | U1B | MCP6002 | + (5) = VDIV, − (6) = out (7) = **VREF** | VREF buffer, 1.65 V |
