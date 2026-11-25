@@ -9,6 +9,7 @@ P=Piezo_MCP6002_RevD
 python3 tools/gen_sch.py
 python3 tools/gen_pcb.py | grep -E "attempt|Found|failed|F.Fab"
 python3 tools/validate.py
+python3 tools/bom.py
 cd $P
 kicad-cli sch export pdf -o Schematic.pdf $P.kicad_sch >/dev/null
 kicad-cli pcb export pdf --layers F.Cu,F.SilkS,Edge.Cuts -o PCB_top_preview.pdf $P.kicad_pcb >/dev/null

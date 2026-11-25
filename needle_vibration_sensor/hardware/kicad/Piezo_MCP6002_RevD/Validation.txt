@@ -4,5 +4,5 @@ PASS: All 79 pad/net assignments match the schematic netlist.
 PASS: All 33 component values and footprint assignments match.
 KiCad DRC: Found 0 DRC violations; Found 0 unconnected pads; Found 0 Footprint errors.
 PASS: GND zones (F.Cu + B.Cu) filled by KiCad.
-Board: 48 x 32 mm, two copper layers; 119 track segments (all on F.Cu, B.Cu = unbroken GND plane); 0.25 mm tracks; 0.6/0.3 mm vias.
+Board: 48 x 32 mm, two copper layers; 121 track segments (all on F.Cu, B.Cu = unbroken GND plane); 0.25 mm tracks; 0.6/0.3 mm vias.
 No full schematic ERC (kicad-cli 7 has no ERC), hardware test, or fabricator-specific review performed.

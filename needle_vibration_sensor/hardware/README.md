@@ -5,11 +5,11 @@
 
 | Block | Parts |
 |---|---|
-| 1. Piezo input + gain | J1 piezo, R1 22k, R2 4.7M, D1 BAV99 to VREF, U1A gain 11 (JP1 closed) / 48 (open) with R3 22k + R14 82k, R4 2.2k, C5 47p |
+| 1. Piezo input + gain | J1 piezo, R1 18k, R2 1M, D1 BAV99 to VREF, U1A gain 11 (JP1 closed) / 44 (open) with R3 10k + R14 33k, R4 1k, C5 47p |
 | 2. Reference | R5/R6 10k, C4 10µ, U1B buffer gives VREF = 1.65 V |
-| 3. Low-pass | U2A: R8/R9 9.1k, C8 1.2n, C9 1n (Q 0.55, 16.0 kHz). U2B: R10/R11 3.9k, C10 6.8n, C11 1n (Q 1.30, 15.7 kHz) |
+| 3. Low-pass | U2A: R8 12k, R9 390k, C8 470p, C9 47p (Q 0.54, 15.7 kHz). U2B: R10 33k, R11 200k, C10 470p, C11 33p (Q 1.32, 15.7 kHz) |
 | 4. Outputs | J3 OUT_DC (R7 100Ω, C6 10n) to ESP32 GPIO1. J4 OUT_AC (C7 2.2µ, R13 100Ω) to PCM1808 L |
-| 5. Power | J2 3V3 → R12 10Ω → AVDD, C3 47µ, C2/C12 100n at pin 8 of each MCP6002 |
+| 5. Power | J2 3V3 → R12 10Ω → AVDD, C3 22µ, C2/C12 100n at pin 8 of each MCP6002 |
 
 Values and response: see `../WIRELESS_DESIGN.md` and `../software/filter_response.py`.
 To transfer it into your KiCad Rev C project: delete C1, change the values above, and add R14 + JP1 (solder jumper), C5, C7, R13 and J4.

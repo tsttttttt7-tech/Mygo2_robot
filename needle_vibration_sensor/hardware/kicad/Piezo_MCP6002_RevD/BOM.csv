@@ -1,34 +1,34 @@
 Reference,Value,Footprint,Package note,Baghdad source
-C2,100n,Piezo_PCB:C1206,1206 SMD,any component shop
-C3,47u,Piezo_PCB:C1210,"1210 SMD, X7R 10 V or higher",any component shop
-C4,10u,Piezo_PCB:C1210,"1210 SMD, X7R 10 V or higher",any component shop
-C5,47p C0G,Piezo_PCB:C1206,1206 SMD,any component shop
-C6,10n,Piezo_PCB:C1206,1206 SMD,any component shop
-C7,2.2u X7R,Piezo_PCB:C1206,1206 SMD,any component shop
-C8,1.2n C0G,Piezo_PCB:C1206,1206 SMD,any component shop
-C9,1n C0G,Piezo_PCB:C1206,1206 SMD,any component shop
-C10,6.8n C0G,Piezo_PCB:C1206,1206 SMD,any component shop
-C11,1n C0G,Piezo_PCB:C1206,1206 SMD,any component shop
-C12,100n,Piezo_PCB:C1206,1206 SMD,any component shop
-D1,BAV99,Piezo_PCB:BAV99_SOT23,"SOT-23; pin 3 = IN, pins 1+2 = VREF",Al-Hekmh Electronics (alhekmh.com)
+C2,100n,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C3,22u,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C4,10u,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C5,47p C0G,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C6,10n,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C7,2.2u X7R,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C8,470p C0G,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C9,47p C0G,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C10,470p C0G,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C11,33p C0G,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+C12,100n,Piezo_PCB:C1206,1206 SMD,"Ardunic capacitor kit ARD-065072 (1206, 16 values, IQD 7,000)"
+D1,BAV99,Piezo_PCB:BAV99_SOT23,"SOT-23; pin 3 = IN, pins 1+2 = VREF","Al-Hekmh Electronics, Tahrir Sq. (alhekmh.com)"
 J1,PIEZO,Piezo_PCB:Header_1x02,2.54 mm 2-pin header,any component shop
-JP1,GAIN 11 = closed,Piezo_PCB:SolderJumper_2,"solder bridge = gain 11, open = gain 48",any component shop
 J2,3V3 IN,Piezo_PCB:Header_1x02,2.54 mm 2-pin header,any component shop
 J3,OUT_DC (ESP32 ADC),Piezo_PCB:Header_1x02,2.54 mm 2-pin header,any component shop
 J4,OUT_AC (PCM1808),Piezo_PCB:Header_1x02,2.54 mm 2-pin header,any component shop
-R1,22k,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R2,4.7M,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R3,22k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R4,2.2k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R5,10k,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R6,10k,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R7,100R,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R8,9.1k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R9,9.1k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R10,3.9k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R11,3.9k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R12,10R,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R13,100R,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-R14,82k 1%,Piezo_PCB:R1206,"1206 SMD, 1 % metal film where marked",any component shop
-U1,MCP6002-I/P,Piezo_PCB:DIP8,"DIP-8, 7.62 mm rows; socket optional",Al-Hekmh Electronics (alhekmh.com)
-U2,MCP6002-I/P,Piezo_PCB:DIP8,"DIP-8, 7.62 mm rows; socket optional",Al-Hekmh Electronics (alhekmh.com)
+JP1,GAIN 11 = closed / 44 = open,Piezo_PCB:SolderJumper_2,"solder bridge = gain 11, open = gain 44","PCB pads, no part"
+R1,18k,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R2,1M,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R3,10k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R4,1k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R5,10k,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R6,10k,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R7,100R,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R8,12k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R9,390k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R10,33k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R11,200k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R12,10R,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R13,100R,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+R14,33k 1%,Piezo_PCB:R1206,1206 SMD 1 %,"Ardunic resistor kit ARD-065066 (1206, 33 values, IQD 7,500)"
+U1,MCP6002-I/P,Piezo_PCB:DIP8,"DIP-8, 7.62 mm rows; socket optional","Al-Hekmh Electronics, Tahrir Sq. (alhekmh.com)"
+U2,MCP6002-I/P,Piezo_PCB:DIP8,"DIP-8, 7.62 mm rows; socket optional","Al-Hekmh Electronics, Tahrir Sq. (alhekmh.com)"

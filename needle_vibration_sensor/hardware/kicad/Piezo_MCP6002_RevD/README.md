@@ -20,13 +20,14 @@ Keep `Piezo_PCB.pretty`, `Piezo_Local.kicad_sym`, `fp-lib-table` and `sym-lib-ta
 ## Changes from Rev C
 | | Rev C | Rev D |
 |---|---|---|
-| Low-pass | 9.9 kHz, E96 values (14.7 k, 6.19 k) | **15 kHz**, E24 values (9.1 k, 3.9 k), sold in Baghdad |
+| Low-pass | 9.9 kHz, E96 values (14.7 k, 6.19 k) | **15 kHz**; every R and C taken from the Ardunic 1206 kits ARD-065066 / ARD-065072 (12k/390k/470p/47p, 33k/200k/470p/33p) |
 | C1 (1 µF film input cap) | yes | **removed**: the piezo already blocks DC |
 | Input clamp | BAV199 | **BAV99** (same SOT-23 pinout, in stock at Al-Hekmh) |
-| Gain | fixed 11 | **11 with JP1 bridged / 48 with JP1 open** (R3 22 k + R14 82 k) |
+| Gain | fixed 11 | **11 with JP1 bridged / 44 with JP1 open** (R4 1 k, R3 10 k + R14 33 k) |
 | Stability | – | C5 47 pF across the feedback network |
 | Outputs | J3 only | **J3 OUT_DC** (ESP32-S3 ADC, via R7/C6) + **J4 OUT_AC** (PCM1808, via C7/R13) |
-| Supply filter | R12 22 Ω | R12 10 Ω |
+| Supply filter | R12 22 Ω, C3 47 µF | R12 10 Ω, C3 22 µF |
+| Input bias | R2 4.7 MΩ (corner ~3 Hz) | R2 1 MΩ (corner ~16 Hz), the kit's largest value |
 
 ## Connectors
 | Connector | Pin 1 (square pad) | Pin 2 |
@@ -37,9 +38,10 @@ Keep `Piezo_PCB.pretty`, `Piezo_Local.kicad_sym`, `fp-lib-table` and `sym-lib-ta
 | J4 | OUT_AC to PCM1808 `L` | GND |
 
 ## Assembly notes
-- **JP1:** bridge the two pads with solder for gain 11 (start here). Remove the bridge for gain 48.
+- **JP1:** bridge the two pads with solder for gain 11 (start here). Remove the bridge for gain 44.
 - U1/U2 are DIP-8 (MCP6002-I/P from Al-Hekmh). Sockets are optional, but they add height (see the housing).
-- Filter capacitors C8–C11 and C5 must be **C0G/NP0**. Clean the flux around R1/R2/D1/U1 pin 3 (high-impedance node).
+- Filter capacitors C5, C8–C11 are the pF values of the kit (C0G/NP0 dielectric, stable).
+- Clean the flux well around the high-impedance nodes: R1/R2/D1/U1 pin 3 (input) and R9 (390k) / R11 (200k) with C9/C11 (filter).
 - Three reference labels (C6, R10, R14) had no free silkscreen spot. They are on the assembly (F.Fab) layer: see `PCB_assembly.png`.
 - Housing for this board: `../../stl/revD_48x32/` (58 × 42 mm body). Trim the through-hole leads to ≤ 1 mm under the board, because the cover lip leaves 1 mm.
 

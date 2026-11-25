@@ -37,10 +37,10 @@ Single 3.3 V supply. Same topology as your Rev C, with these changes:
 | Change vs Rev C | Reason |
 |---|---|
 | Low-pass corner **9.9 kHz → 15 kHz** | Puncture events excite high frequencies (patent [0138]). Keep more of them. |
-| All filter values from the **E24 series** (9.1 k, 3.9 k) | Shops in Baghdad stock E24 values, not 14.7 k / 6.19 k 1 % parts. |
+| **Every R and C comes from two Ardunic 1206 kits** (ARD-065066 resistors, ARD-065072 capacitors) | Filter: 12k/390k/470p/47p and 33k/200k/470p/33p, found by a search over all kit values (0.1 dB from ideal Butterworth). |
 | **BAV199 → BAV99** | BAV99 is in stock at Al-Hekmh. At about 0 V bias its leakage is negligible. |
 | **C1 removed** | The piezo is itself a capacitor, so it already blocks DC. One less, and the largest, part. |
-| **Gain jumper ×11 / ×48** | ×48 for the 12-bit ESP32 ADC (otherwise ADC noise dominates). ×11 for the PCM1808. |
+| **Gain jumper ×11 / ×44** | ×44 for the 12-bit ESP32 ADC (otherwise ADC noise dominates). ×11 for the PCM1808. |
 | Two outputs: **DC output** (to the ESP32 ADC) and **AC output** (to the PCM1808) | So one PCB serves both ADCs. |
 
 ### Netlist (U1, U2 = MCP6002, SOIC-8 or DIP-8; pin 8 = AVDD, pin 4 = GND)
@@ -48,29 +48,29 @@ Single 3.3 V supply. Same topology as your Rev C, with these changes:
 | Ref | Value | Connects | Function |
 |---|---|---|---|
 | J1 | 2-pin | 1 = piezo ceramic (+), 2 = piezo brass, **GND** | Piezo input. Keep the wires under 3 cm. |
-| R1 | 22 kΩ | J1.1 → IN | Limits current during big impacts (MCP6002 input limit ±2 mA up to about 44 V) |
-| R2 | 4.7 MΩ | IN → VREF | Input bias. Low cut-off ≈ 3.4 Hz with a 10 nF piezo. |
+| R1 | 18 kΩ | J1.1 → IN | Limits current during big impacts (MCP6002 input limit ±2 mA up to about 36 V) |
+| R2 | 1 MΩ | IN → VREF | Input bias. Low cut-off ≈ 16 Hz with a 10 nF piezo (the kit's largest value). |
 | D1 | BAV99 | pin 3 → IN; pins 1 and 2 → VREF | Anti-parallel clamp to VREF |
 | U1A | MCP6002 | + (3) = IN, − (2) = FB, out (1) = AMP | Non-inverting gain stage |
-| R4 | 2.2 kΩ 1 % | FB → VREF | Gain resistor |
-| R3 | 22 kΩ 1 % | FB → X | Feedback |
-| R14 + JP1 | 82 kΩ 1 %, solder jumper across it | X → AMP | JP1 closed: gain **11**. JP1 open: gain **48**. |
+| R4 | 1 kΩ 1 % | FB → VREF | Gain resistor |
+| R3 | 10 kΩ 1 % | FB → X | Feedback |
+| R14 + JP1 | 33 kΩ 1 %, solder jumper across it | X → AMP | JP1 closed: gain **11**. JP1 open: gain **44**. |
 | C5 | 47 pF C0G | across R3 + R14 (FB → AMP) | Stability and RF roll-off |
 | R5, R6 | 10 kΩ, 10 kΩ | AVDD → VDIV → GND | Half-supply divider |
 | C4 | 10 µF | VDIV → GND | Filters VREF (placed **before** the buffer) |
 | U1B | MCP6002 | + (5) = VDIV, − (6) = out (7) = **VREF** | VREF buffer, 1.65 V |
-| R8, R9 | 9.1 kΩ, 9.1 kΩ | AMP → A1 → P1 | Sallen-Key 1 (Q = 0.55, f₀ = 16.0 kHz) |
-| C8 | 1.2 nF film/C0G | A1 → LP1 (U2A output) | Feedback capacitor |
-| C9 | 1 nF film/C0G | P1 → GND | |
+| R8, R9 | 12 kΩ, 390 kΩ | AMP → A1 → P1 | Sallen-Key 1 (Q = 0.54, f₀ = 15.7 kHz) |
+| C8 | 470 pF C0G | A1 → LP1 (U2A output) | Feedback capacitor |
+| C9 | 47 pF C0G | P1 → GND | |
 | U2A | MCP6002 | + (3) = P1, − (2) = out (1) = LP1 | Unity-gain buffer |
-| R10, R11 | 3.9 kΩ, 3.9 kΩ | LP1 → A2 → P2 | Sallen-Key 2 (Q = 1.30, f₀ = 15.7 kHz) |
-| C10 | 6.8 nF film/C0G | A2 → FOUT (U2B output) | Feedback capacitor |
-| C11 | 1 nF film/C0G | P2 → GND | |
+| R10, R11 | 33 kΩ, 200 kΩ | LP1 → A2 → P2 | Sallen-Key 2 (Q = 1.32, f₀ = 15.7 kHz) |
+| C10 | 470 pF C0G | A2 → FOUT (U2B output) | Feedback capacitor |
+| C11 | 33 pF C0G | P2 → GND | |
 | U2B | MCP6002 | + (5) = P2, − (6) = out (7) = FOUT | Unity-gain buffer |
 | R7, C6 | 100 Ω, 10 nF | FOUT → **J3.1 (OUT_DC)**; C6 to GND | Charge reservoir for the ESP32 ADC's sampling capacitor |
 | C7, R13 | 2.2 µF film or X7R, 100 Ω | FOUT → C7 → R13 → **J4.1 (OUT_AC)** | AC output for the PCM1808 |
 | R12 | 10 Ω | J2.1 (3V3 from ESP32 board) → AVDD | Supply filter, together with C3 |
-| C3 | 47 µF | AVDD → GND | |
+| C3 | 22 µF | AVDD → GND | |
 | C2, C12 | 100 nF | U1/U2 pin 8 → GND, right at the pins | Decoupling |
 | J2, J3, J4 | 2-pin each | 3V3/GND, OUT_DC/GND, OUT_AC/GND | |
 
@@ -79,17 +79,17 @@ Use 1206 if you hand-solder. Film (polyester "2A102J" type) capacitors are fine 
 
 ### Calculated response (`software/filter_response.py`, MCP6002 1 MHz GBW model, 10 nF piezo)
 
-| f | gain ×11 | gain ×48 |
+| f | gain ×11 | gain ×44 |
 |---|---|---|
-| 30 Hz | −0.10 dB | – |
-| 1 kHz | −0.04 dB | – |
-| 10 kHz | +0.12 dB | – |
-| 12 kHz | −0.23 dB | −1.40 dB |
-| 15 kHz | −2.2 dB | −3.9 dB |
-| 24 kHz | −15 dB | |
-| 65 kHz (folds back into the band at 80 kSPS) | **−51 dB** | |
+| 30 Hz | −1.2 dB | – |
+| 1 kHz | −0.16 dB | – |
+| 10 kHz | −0.26 dB | – |
+| 12 kHz | −0.63 dB | −1.62 dB |
+| 15 kHz | −2.5 dB | −4.0 dB |
+| 24 kHz | −16 dB | |
+| 65 kHz (folds back into the band at 80 kSPS) | **−52 dB** | |
 
-* Headroom: the output swings ±1.55 V, so the input clips at about **±140 mV (×11)** or **±32 mV (×48)**. Start at ×11, look at real
+* Headroom: the output swings ±1.55 V, so the input clips at about **±140 mV (×11)** or **±35 mV (×44)**. Start at ×11, look at real
   punctures, then open JP1 if the signals are small.
 * These are model results only, not measured. Check them on the bench (step 4 in your Rev C notes still applies).
 
@@ -104,7 +104,7 @@ Keep the ESP32 and its antenna at least 5 cm away, connected by a 3-wire shielde
 ### A: ESP32-S3 built-in (available now)
 * Connect J3 (OUT_DC) to **GPIO1** (ADC1 channel 0). Never use ADC2 pins, because ADC2 does not work while Wi-Fi is on.
 * Continuous DMA at **80 kSPS**, 12 dB attenuation (0–3.1 V). The 4-pole filter acts as the anti-alias filter.
-* Expect about 9–10 effective bits. Use **gain ×48** so that ADC noise is not the limit. Wi-Fi bursts add some noise: the firmware lowers
+* Expect about 9–10 effective bits. Use **gain ×44** so that ADC noise is not the limit. Wi-Fi bursts add some noise: the firmware lowers
   TX power, and you should keep the antenna away from the analog board.
 
 ### B: PCM1808 module (best quality, order online)
@@ -156,8 +156,8 @@ The analog board takes its 3.3 V from the ESP32 board's 3V3 pin through R12/C3. 
 | BAV99 SOT-23 | 1 | [Al-Hekmh](https://alhekmh.com/bav99-a7-diode-dual-series-fast-100v-215ma-4ns-sot-23/) | Listed online |
 | Piezo disc 20 mm / 27 mm | 2 | [Al-Hekmh acoustics](https://alhekmh.com/acoustics/) (BUZZ27/BUZZ20) | Listed online |
 | ESP32-S3 N16R8 board | 1 | [Iraqi Bazaar](https://iraqibazaar.com/en/product/esp32-s3-n16r8-cam-16mb-flash-8mb-psram-without-camera/), IQD 20,000 | Listed online |
-| Resistors (22 k, 2.2 k, 82 k, 10 k ×2, 4.7 M, 9.1 k ×2, 3.9 k ×2, 100 Ω ×2, 10 Ω) | – | Any component shop, Tahrir Sq. market | Standard E24 values |
-| Film caps 1 nF ×2, 1.2 nF, 6.8 nF; 47 pF; 10 nF; 100 nF ×2; 2.2 µF; 10 µF; 47 µF | – | Any component shop | Standard |
+| **All resistors**: 1206 kit, 33 values × 20, 1 % | 1 | [Ardunic ARD-065066](https://ardunic.com/), IQD 7,500 | Seen on the shop's site |
+| **All capacitors**: 1206 kit, 16 values × 20 (33p, 47p, 470p, 10n, 100n, 2.2µ, 10µ, 22µ used) | 1 | [Ardunic ARD-065072](https://ardunic.com/), IQD 7,000 | Seen on the shop's site |
 | 18650 battery shield **or** TP4056 + MT3608, or a power bank | 1 | Maker shops (UrukTech, Ardunic) | Common; not checked online |
 | PCM1808 module (option B) | 1 | Order online (AliExpress, eBay, Amazon) | **Not found in Iraqi shops** |
 | Fallback MCU: classic ESP32 DevKit | – | [UrukTech](https://www.uruktech.com/product/esp32-development-board/) | Works, but the ADC is noisier, and MCLK only on GPIO0/1/3 (change pins) |

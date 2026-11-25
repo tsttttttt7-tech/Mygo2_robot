@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frequency response of the piezo front end (gain stage + 4th-order Butterworth, 15 kHz).
+"""Frequency response of the piezo front end (gain stage + 4th-order Butterworth, 15 kHz), Rev D kit values.
 
 Models: piezo as Cp in series, R1+R2 input network, MCP6002 as single-pole 1 MHz GBW.
     python filter_response.py [--gain 11] [--cp 10e-9]
@@ -20,11 +20,11 @@ def sallen_key(f, R1, R2, C1, C2):
     return k * Vp
 
 
-def response(f, gain=11.0, cp=10e-9, r1=22e3, r2=4.7e6):
+def response(f, gain=11.0, cp=10e-9, r1=18e3, r2=1e6):
     s = 2j * np.pi * f
     hp = s * cp * r2 / (1 + s * cp * (r1 + r2))
     g = gain / (1 + gain * s / (2 * np.pi * GBW))
-    return hp * g * sallen_key(f, 9.1e3, 9.1e3, 1.2e-9, 1e-9) * sallen_key(f, 3.9e3, 3.9e3, 6.8e-9, 1e-9)
+    return hp * g * sallen_key(f, 12e3, 390e3, 470e-12, 47e-12) * sallen_key(f, 33e3, 200e3, 470e-12, 33e-12)
 
 
 if __name__ == "__main__":
